@@ -1,0 +1,13 @@
+{
+  "name": "api.reviews",
+  "version": "4.5.1",
+  "main": "",
+  "ignore": [
+    "source",
+    ".gitignore",
+    ".idea",
+    "bower.json",
+    "gulpfile.js",
+    "package.json"
+  ]
+}
