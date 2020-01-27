@@ -281,7 +281,7 @@ class Tools
 	/////////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 404 ошибка компонента
+	 * 404 РѕС€РёР±РєР° РєРѕРјРїРѕРЅРµРЅС‚Р°
 	 *
 	 * @param string $message        Message to show with bitrix:system.show_message component.
 	 * @param bool   $defineConstant If true then ERROR_404 constant defined.
@@ -331,7 +331,7 @@ class Tools
 	}
 
 	/**
-	 * Обрабатывает шаблоны ЧПУ
+	 * РћР±СЂР°Р±Р°С‚С‹РІР°РµС‚ С€Р°Р±Р»РѕРЅС‹ Р§РџРЈ
 	 *
 	 * @param $reviewId
 	 * @param $template

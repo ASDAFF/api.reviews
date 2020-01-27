@@ -19,7 +19,7 @@ class Component extends \CBitrixComponent
 		$arParams = &$this->arParams;
 		$arResult = &$this->arResult;
 
-		//Правила доступа к модулю
+		//РџСЂР°РІРёР»Р° РґРѕСЃС‚СѓРїР° Рє РјРѕРґСѓР»СЋ
 		$useSale   = Loader::includeModule('sale');
 		$useIblock = Loader::IncludeModule('iblock');
 
@@ -72,7 +72,7 @@ class Component extends \CBitrixComponent
 			$arResult = $cache->getVars();
 		}
 		else {
-			//Обновление кэша при аякс-изменениях
+			//РћР±РЅРѕРІР»РµРЅРёРµ РєСЌС€Р° РїСЂРё Р°СЏРєСЃ-РёР·РјРµРЅРµРЅРёСЏС…
 			if($cache_time == 0) {
 				//$cache->clean($cache_id, $cache_path);
 				$cache->cleanDir($cache_path);
@@ -440,19 +440,19 @@ class Component extends \CBitrixComponent
 				$taggetCache->endTagCache();
 
 				if($cache_time) {
-					//начинаем буферизирование вывода
+					//РЅР°С‡РёРЅР°РµРј Р±СѓС„РµСЂРёР·РёСЂРѕРІР°РЅРёРµ РІС‹РІРѕРґР°
 					$cache->startDataCache($cache_time, $cache_id, $cache_path);
 
-					//Кэшируем переменные
+					//РљСЌС€РёСЂСѓРµРј РїРµСЂРµРјРµРЅРЅС‹Рµ
 					$cache->endDataCache($arResult);
 				}
 			}
 			else {
 
-				//Отменяем кэширование
+				//РћС‚РјРµРЅСЏРµРј РєСЌС€РёСЂРѕРІР°РЅРёРµ
 				$cache->abortDataCache();
 
-				//Выводим 404 страницу
+				//Р’С‹РІРѕРґРёРј 404 СЃС‚СЂР°РЅРёС†Сѓ
 				Tools::send404(
 					 trim($arParams["MESSAGE_404"]) ?: Loc::getMessage('API_REVIEWS_STATUS_404')
 					 , true

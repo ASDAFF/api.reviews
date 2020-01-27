@@ -14,14 +14,14 @@ class VideoTable extends Main\Entity\DataManager
 	public static function getMap()
 	{
 		/*
-			boolean (наследует ScalarField)
-			date (наследует ScalarField)
-			datetime (наследует DateField)
-			enum (наследует ScalarField)
-			float (наследует ScalarField)
-			integer (наследует ScalarField)
-			string (наследует ScalarField)
-			text (наследует StringField)
+			boolean (РЅР°СЃР»РµРґСѓРµС‚ ScalarField)
+			date (РЅР°СЃР»РµРґСѓРµС‚ ScalarField)
+			datetime (РЅР°СЃР»РµРґСѓРµС‚ DateField)
+			enum (РЅР°СЃР»РµРґСѓРµС‚ ScalarField)
+			float (РЅР°СЃР»РµРґСѓРµС‚ ScalarField)
+			integer (РЅР°СЃР»РµРґСѓРµС‚ ScalarField)
+			string (РЅР°СЃР»РµРґСѓРµС‚ ScalarField)
+			text (РЅР°СЃР»РµРґСѓРµС‚ StringField)
 		 */
 		return array(
 			 new Main\Entity\IntegerField('ID', array(

@@ -152,18 +152,18 @@ foreach($arParams["DELIVERY"] as $k => $v)
 		unset($arParams["DELIVERY"][ $k ]);
 
 
-//Лэнги полей
+//Р›СЌРЅРіРё РїРѕР»РµР№
 if($arParams['DISPLAY_FIELDS']) {
 	foreach($arParams['DISPLAY_FIELDS'] as $FIELD) {
 
-		//Заменить встроенные названия полей на свои
+		//Р—Р°РјРµРЅРёС‚СЊ РІСЃС‚СЂРѕРµРЅРЅС‹Рµ РЅР°Р·РІР°РЅРёСЏ РїРѕР»РµР№ РЅР° СЃРІРѕРё
 		$pFieldNameMess   = $arParams[ 'MESS_FIELD_NAME_' . $FIELD ];
 		$tplFieldNameMess = Loc::getMessage('API_REVIEWS_FORM_' . $FIELD);
 
 		$arParams[ 'MESS_FIELD_NAME_' . $FIELD ] = ($pFieldNameMess ? $pFieldNameMess : $tplFieldNameMess['NAME']);
 
 
-		//Заменить встроенные placeholder полей на свои
+		//Р—Р°РјРµРЅРёС‚СЊ РІСЃС‚СЂРѕРµРЅРЅС‹Рµ placeholder РїРѕР»РµР№ РЅР° СЃРІРѕРё
 		$pFieldPlaceholderMess   = $arParams[ 'MESS_FIELD_PLACEHOLDER_' . $FIELD ];
 		$tplFieldPlaceholderMess = Loc::getMessage('API_REVIEWS_FORM_' . $FIELD);
 
@@ -205,7 +205,7 @@ if($isAction) {
 		$arFile    = &$_FILES['FILES'];
 		$sessFiles = &$_SESSION['API_REVIEWS_FORM']['FILES'];
 
-		//Проверим лимиты на загружаемые видео
+		//РџСЂРѕРІРµСЂРёРј Р»РёРјРёС‚С‹ РЅР° Р·Р°РіСЂСѓР¶Р°РµРјС‹Рµ РІРёРґРµРѕ
 		if($arParams['UPLOAD_FILE_LIMIT']) {
 			if($sessFiles && count($sessFiles) == $arParams['UPLOAD_FILE_LIMIT']) {
 				$response['alert'] = Loc::getMessage('API_REVIEWS_FORM_ALERT_UPLOAD_FILE_LIMIT');
@@ -215,7 +215,7 @@ if($isAction) {
 
 		if($arFile) {
 
-			//Создаем папку для загрузки временных файлов, если не создана
+			//РЎРѕР·РґР°РµРј РїР°РїРєСѓ РґР»СЏ Р·Р°РіСЂСѓР·РєРё РІСЂРµРјРµРЅРЅС‹С… С„Р°Р№Р»РѕРІ, РµСЃР»Рё РЅРµ СЃРѕР·РґР°РЅР°
 			if(!is_dir($arParams['UPLOAD_TMP_DIR']))
 				if(!mkdir($arParams['UPLOAD_TMP_DIR'], 0755, true))
 					$response['message'] = Loc::getMessage('AFDC_WARNING_UPLOAD_TMP_DIR');
@@ -284,13 +284,13 @@ if($isAction) {
 	elseif($action == 'FILE_DELETE') {
 		if($fileCode = $request->get('FILE_CODE')) {
 
-			//Удалит файл с диска
+			//РЈРґР°Р»РёС‚ С„Р°Р№Р» СЃ РґРёСЃРєР°
 			$filePath = $arParams['UPLOAD_TMP_DIR'] . '/' . $fileCode;
 			if(is_file($filePath) && file_exists($filePath)) {
 				@unlink($filePath);
 			}
 
-			//Удалит файл из сессии
+			//РЈРґР°Р»РёС‚ С„Р°Р№Р» РёР· СЃРµСЃСЃРёРё
 			if($arSessFile = &$_SESSION['API_REVIEWS_FORM']['FILES']) {
 				if(isset($arSessFile[ $fileCode ]))
 					unset($arSessFile[ $fileCode ]);
@@ -304,7 +304,7 @@ if($isAction) {
 
 		$sessVideos = &$_SESSION['API_REVIEWS_FORM']['VIDEOS'];
 
-		//Проверим лимиты на загружаемые видео
+		//РџСЂРѕРІРµСЂРёРј Р»РёРјРёС‚С‹ РЅР° Р·Р°РіСЂСѓР¶Р°РµРјС‹Рµ РІРёРґРµРѕ
 		if($arParams['UPLOAD_VIDEO_LIMIT']) {
 			if($sessVideos && count($sessVideos) == $arParams['UPLOAD_VIDEO_LIMIT']) {
 				$response['alert'] = Loc::getMessage('API_REVIEWS_FORM_ALERT_UPLOAD_VIDEO_LIMIT');
@@ -322,13 +322,13 @@ if($isAction) {
 				 preg_match('/[http|https]+:\/\/(?:www\.|)youtube\.com\/embed\/([a-zA-Z0-9_\-]+)/i', $url, $matches) ||
 				 preg_match('/[http|https]+:\/\/(?:www\.|)youtu\.be\/([a-zA-Z0-9_\-]+)/i', $url, $matches)
 			) {
-				//Исходный адрес ролика
+				//РСЃС…РѕРґРЅС‹Р№ Р°РґСЂРµСЃ СЂРѕР»РёРєР°
 				//https://www.youtube.com/watch?v=8kJbXM1rftk
 
-				//Уменьшенное превью с черными полосами в ужасном качестве
+				//РЈРјРµРЅСЊС€РµРЅРЅРѕРµ РїСЂРµРІСЊСЋ СЃ С‡РµСЂРЅС‹РјРё РїРѕР»РѕСЃР°РјРё РІ СѓР¶Р°СЃРЅРѕРј РєР°С‡РµСЃС‚РІРµ
 				//http://img.youtube.com/vi/8kJbXM1rftk/0.jpg
 
-				//В исходном коде есть такие ссылки
+				//Р’ РёСЃС…РѕРґРЅРѕРј РєРѕРґРµ РµСЃС‚СЊ С‚Р°РєРёРµ СЃСЃС‹Р»РєРё
 				//<link rel="shortlink" href="https://youtu.be/8kJbXM1rftk">
 				//<link itemprop="embedURL" href="https://www.youtube.com/embed/8kJbXM1rftk">
 				//<link itemprop="thumbnailUrl" href="https://i.ytimg.com/vi/8kJbXM1rftk/maxresdefault.jpg">
@@ -339,7 +339,7 @@ if($isAction) {
 				$videoUrl = 'https://www.youtube.com/embed/' . $videoId;
 				$imageUrl = 'http://img.youtube.com/vi/' . $videoId . '/0.jpg';
 
-				//Получаем html-страницу ролика и парсим
+				//РџРѕР»СѓС‡Р°РµРј html-СЃС‚СЂР°РЅРёС†Сѓ СЂРѕР»РёРєР° Рё РїР°СЂСЃРёРј
 				$html = Tools::curlExec($url);
 
 				preg_match('/<title>(.*)<\/title>/im', $html, $matches);
@@ -397,7 +397,7 @@ if($isAction) {
 						 'description' => $videoDesc,
 					);
 
-					//Скачиваем картинку и добавляем в таблицу b_file
+					//РЎРєР°С‡РёРІР°РµРј РєР°СЂС‚РёРЅРєСѓ Рё РґРѕР±Р°РІР»СЏРµРј РІ С‚Р°Р±Р»РёС†Сѓ b_file
 					if($imageUrl) {
 						$fileName    = $videoId . '.' . GetFileExtension($imageUrl);
 						$tmpFileName = Tools::getUniqueFileName($fileName, 'VIDEOS', $USER->GetID());
@@ -450,7 +450,7 @@ if($isAction) {
 	elseif($action == 'VIDEO_DELETE') {
 		if($videoId = trim($request->get('VIDEO_ID'))) {
 
-			//Удалит файл c диска и из сессии
+			//РЈРґР°Р»РёС‚ С„Р°Р№Р» c РґРёСЃРєР° Рё РёР· СЃРµСЃСЃРёРё
 			if($arSessThums = &$_SESSION['API_REVIEWS_FORM']['VIDEOS_THUMBS']) {
 				if(isset($arSessThums[ $videoId ])) {
 
@@ -462,7 +462,7 @@ if($isAction) {
 				}
 			}
 
-			//Удалит видео из сессии
+			//РЈРґР°Р»РёС‚ РІРёРґРµРѕ РёР· СЃРµСЃСЃРёРё
 			if($arSessVideo = &$_SESSION['API_REVIEWS_FORM']['VIDEOS']) {
 				if(isset($arSessVideo[ $videoId ]))
 					unset($arSessVideo[ $videoId ]);
@@ -513,10 +513,10 @@ if($request->isPost() && $request->get('API_REVIEWS_FORM_AJAX') == 'Y') {
 			$fields = Encoding::convertEncoding($fields, 'UTF-8', $context->getCulture()->getCharset());
 
 
-		//---------- Премодерация ----------//
-		if($arParams['PREMODERATION'] == 'Y') //Все
+		//---------- РџСЂРµРјРѕРґРµСЂР°С†РёСЏ ----------//
+		if($arParams['PREMODERATION'] == 'Y') //Р’СЃРµ
 			$fields['ACTIVE'] = 'N';
-		elseif($arParams['PREMODERATION'] == 'A' && !$USER->IsAuthorized()) //Аноним
+		elseif($arParams['PREMODERATION'] == 'A' && !$USER->IsAuthorized()) //РђРЅРѕРЅРёРј
 			$fields['ACTIVE'] = 'N';
 		else
 			$fields['ACTIVE'] = 'Y';
@@ -530,7 +530,7 @@ if($request->isPost() && $request->get('API_REVIEWS_FORM_AJAX') == 'Y') {
 		$fields['VIDEOS'] = (array)$_SESSION['API_REVIEWS_FORM']['VIDEOS'];
 
 
-		//---------- Проверка обязательных полей ----------//
+		//---------- РџСЂРѕРІРµСЂРєР° РѕР±СЏР·Р°С‚РµР»СЊРЅС‹С… РїРѕР»РµР№ ----------//
 		if($arParams['REQUIRED_FIELDS']) {
 			foreach($arParams['REQUIRED_FIELDS'] as $code) {
 				if(!$fields[ $code ]) {
@@ -549,7 +549,7 @@ if($request->isPost() && $request->get('API_REVIEWS_FORM_AJAX') == 'Y') {
 			}
 		}
 
-		//---------- Проверка существования выполненного заказа ----------//
+		//---------- РџСЂРѕРІРµСЂРєР° СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёСЏ РІС‹РїРѕР»РЅРµРЅРЅРѕРіРѕ Р·Р°РєР°Р·Р° ----------//
 		if($orderId = $fields['ORDER_ID']) {
 			if($arResultModules['sale']) {
 
@@ -578,7 +578,7 @@ if($request->isPost() && $request->get('API_REVIEWS_FORM_AJAX') == 'Y') {
 		}
 
 
-		//---------- Доп. параметры привязки отзыва ----------//
+		//---------- Р”РѕРї. РїР°СЂР°РјРµС‚СЂС‹ РїСЂРёРІСЏР·РєРё РѕС‚Р·С‹РІР° ----------//
 		$fields['IBLOCK_ID']  = $arParams['IBLOCK_ID'];
 		$fields['SECTION_ID'] = $arParams['SECTION_ID'];
 		$fields['ELEMENT_ID'] = $arParams['ELEMENT_ID'];
@@ -586,32 +586,32 @@ if($request->isPost() && $request->get('API_REVIEWS_FORM_AJAX') == 'Y') {
 		$fields['URL']        = $arParams['URL'];
 
 
-		//---------- Если ошибок нет, добавляем отзыв ----------//
+		//---------- Р•СЃР»Рё РѕС€РёР±РѕРє РЅРµС‚, РґРѕР±Р°РІР»СЏРµРј РѕС‚Р·С‹РІ ----------//
 		if(!$sendResult['FIELDS']) {
 
 			Event::execute('onBeforeReviewAdd', array(&$fields, $arParams));
 
-			//Файлы добавим в таблицу только после успешного добавления отзыва
+			//Р¤Р°Р№Р»С‹ РґРѕР±Р°РІРёРј РІ С‚Р°Р±Р»РёС†Сѓ С‚РѕР»СЊРєРѕ РїРѕСЃР»Рµ СѓСЃРїРµС€РЅРѕРіРѕ РґРѕР±Р°РІР»РµРЅРёСЏ РѕС‚Р·С‹РІР°
 			$fileList = array();
 			if($fields['FILES']) {
 				$fileList = $fields['FILES'];
 			}
 			$fields['FILES'] = '';
 
-			//Видео и превью добавим в таблицу только после успешного добавления отзыва
+			//Р’РёРґРµРѕ Рё РїСЂРµРІСЊСЋ РґРѕР±Р°РІРёРј РІ С‚Р°Р±Р»РёС†Сѓ С‚РѕР»СЊРєРѕ РїРѕСЃР»Рµ СѓСЃРїРµС€РЅРѕРіРѕ РґРѕР±Р°РІР»РµРЅРёСЏ РѕС‚Р·С‹РІР°
 			$videoList = array();
 			if($fields['VIDEOS']) {
 				$videoList = $fields['VIDEOS'];
 			}
 			$fields['VIDEOS'] = '';
 
-			//Добавляем отзыв в базу
+			//Р”РѕР±Р°РІР»СЏРµРј РѕС‚Р·С‹РІ РІ Р±Р°Р·Сѓ
 			$result = ReviewsTable::add($fields);
 			if($result->isSuccess()) {
 
 				$id = $result->getId();
 
-				//Добавим файлы в таблицу b_file
+				//Р”РѕР±Р°РІРёРј С„Р°Р№Р»С‹ РІ С‚Р°Р±Р»РёС†Сѓ b_file
 				$arFileId = array();
 				if($fileList) {
 					foreach($fileList as $arFile) {
@@ -622,7 +622,7 @@ if($request->isPost() && $request->get('API_REVIEWS_FORM_AJAX') == 'Y') {
 				}
 
 
-				//Сначала добавим превью видео в таблицу b_file
+				//РЎРЅР°С‡Р°Р»Р° РґРѕР±Р°РІРёРј РїСЂРµРІСЊСЋ РІРёРґРµРѕ РІ С‚Р°Р±Р»РёС†Сѓ b_file
 				if($thumbList = (array)$_SESSION['API_REVIEWS_FORM']['VIDEOS_THUMBS']) {
 					foreach($thumbList as $key => $arFile) {
 						if($videoList[ $key ]) {
@@ -633,7 +633,7 @@ if($request->isPost() && $request->get('API_REVIEWS_FORM_AJAX') == 'Y') {
 					unset($thumbList, $arFile, $_SESSION['API_REVIEWS_FORM']['VIDEOS_THUMBS']);
 				}
 
-				//Добавим видео в таблицу api_reviews_video
+				//Р”РѕР±Р°РІРёРј РІРёРґРµРѕ РІ С‚Р°Р±Р»РёС†Сѓ api_reviews_video
 				$arVideoId = array();
 				if($videoList) {
 					foreach($videoList as $arVideo) {
@@ -652,7 +652,7 @@ if($request->isPost() && $request->get('API_REVIEWS_FORM_AJAX') == 'Y') {
 				}
 
 
-				//Обновим отзыв, запишем айдишники файлов и видео
+				//РћР±РЅРѕРІРёРј РѕС‚Р·С‹РІ, Р·Р°РїРёС€РµРј Р°Р№РґРёС€РЅРёРєРё С„Р°Р№Р»РѕРІ Рё РІРёРґРµРѕ
 				if($arFileId || $arVideoId) {
 					ReviewsTable::update($id, array(
 						 'FILES'  => implode(',', $arFileId),

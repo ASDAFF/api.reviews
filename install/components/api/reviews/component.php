@@ -120,7 +120,7 @@ if($arParams['SEF_MODE'] == 'Y') {
 	}
 
 	if($b404){
-		//Выводим 404 страницу
+		//Р’С‹РІРѕРґРёРј 404 СЃС‚СЂР°РЅРёС†Сѓ
 		\Api\Reviews\Tools::send404(
 			 trim($arParams["MESSAGE_404"]) ?: Loc::getMessage('API_REVIEWS_STATUS_404')
 			 , true
@@ -152,7 +152,7 @@ if($arParams['SEF_MODE'] == 'Y') {
 
 	CComponentEngine::initComponentVariables($componentPage, $arComponentVariables, $arVariableAliases, $arVariables);
 
-	//Ищем в строковых адресах ID-ки и передаем в шаблоны
+	//РС‰РµРј РІ СЃС‚СЂРѕРєРѕРІС‹С… Р°РґСЂРµСЃР°С… ID-РєРё Рё РїРµСЂРµРґР°РµРј РІ С€Р°Р±Р»РѕРЅС‹
 	if($arVariables) {
 		foreach($arVariables as $key => $val) {
 			if(preg_match('/[\d]+/', $val, $match))
@@ -189,7 +189,7 @@ else {
 	}
 
 	if($b404){
-		//Выводим 404 страницу
+		//Р’С‹РІРѕРґРёРј 404 СЃС‚СЂР°РЅРёС†Сѓ
 		\Api\Reviews\Tools::send404(
 			 trim($arParams["MESSAGE_404"]) ?: Loc::getMessage('API_REVIEWS_STATUS_404')
 			 , true

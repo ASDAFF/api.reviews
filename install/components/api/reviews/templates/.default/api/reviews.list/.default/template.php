@@ -41,7 +41,7 @@ if($arParams['INCLUDE_CSS'] == 'Y') {
 include 'ajax.php';
 
 /*
-	//Ðåæèì 1
+	//Ð ÐµÐ¶Ð¸Ð¼ 1
 	$reviewsId = "API_REVIEWS_LIST_" . $component->randString();
 ?>
 	<div id="<?=$reviewsId?>">
@@ -58,13 +58,13 @@ include 'ajax.php';
 <?
 */
 /*
-	//Ðåæèì 2
+	//Ð ÐµÐ¶Ð¸Ð¼ 2
 	$frame = $this->createFrame()->begin('Loading...');
 	include 'ajax.php';
 	$frame->end();
 */
 /*
-	//Ðåæèì 3
+	//Ð ÐµÐ¶Ð¸Ð¼ 3
 	$reviewsId = "api_reviews_".$component->randString();
 ?>
 	<div id="<?=$reviewsId?>">

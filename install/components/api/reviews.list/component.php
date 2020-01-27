@@ -77,7 +77,7 @@ $arParams['DETAIL_URL'] = ($arParams['~DETAIL_URL'] ? $httpHost . $arParams['~DE
 //$arParams['DETAIL_URL'] .= $arParams['~DETAIL_HASH'];
 
 
-//Правила доступа к модулю
+//РџСЂР°РІРёР»Р° РґРѕСЃС‚СѓРїР° Рє РјРѕРґСѓР»СЋ
 $isEditor              = ($APPLICATION->GetGroupRight('api.reviews') >= 'W');
 $arParams['IS_EDITOR'] = $isEditor;
 
@@ -91,17 +91,17 @@ $arParams['MESS_ADD_UNSWER_EVENT_TEXT']  = $arParams['~MESS_ADD_UNSWER_EVENT_TEX
 $arParams['MESS_TRUE_BUYER']             = $arParams['~MESS_TRUE_BUYER'] ? $arParams['~MESS_TRUE_BUYER'] : Loc::getMessage('API_REVIEWS_LIST_MESS_TRUE_BUYER');
 $arParams['MESS_HELPFUL_REVIEW']         = $arParams['~MESS_HELPFUL_REVIEW'] ? $arParams['~MESS_HELPFUL_REVIEW'] : Loc::getMessage('API_REVIEWS_LIST_MESS_HELPFUL_REVIEW');
 
-//Лэнги полей
+//Р›СЌРЅРіРё РїРѕР»РµР№
 if($arParams['DISPLAY_FIELDS']) {
 	foreach($arParams['DISPLAY_FIELDS'] as $FIELD) {
 
-		//Заменить встроенные названия полей на свои
+		//Р—Р°РјРµРЅРёС‚СЊ РІСЃС‚СЂРѕРµРЅРЅС‹Рµ РЅР°Р·РІР°РЅРёСЏ РїРѕР»РµР№ РЅР° СЃРІРѕРё
 		$pFieldNameMess   = $arParams[ 'MESS_FIELD_NAME_' . $FIELD ];
 		$tplFieldNameMess = Loc::getMessage('API_REVIEWS_FORM_' . $FIELD);
 
 		$arParams[ 'MESS_FIELD_NAME_' . $FIELD ] = ($pFieldNameMess ? $pFieldNameMess : $tplFieldNameMess['NAME']);
 
-		//Заменить встроенные placeholder полей на свои
+		//Р—Р°РјРµРЅРёС‚СЊ РІСЃС‚СЂРѕРµРЅРЅС‹Рµ placeholder РїРѕР»РµР№ РЅР° СЃРІРѕРё
 		$pFieldPlaceholderMess   = $arParams[ 'MESS_FIELD_PLACEHOLDER_' . $FIELD ];
 		$tplFieldPlaceholderMess = Loc::getMessage('API_REVIEWS_FORM_' . $FIELD);
 
@@ -345,7 +345,7 @@ else{
 
 $arFilter = array_merge($arFilter, $arrFilter);
 
-//Фильтр для счетчика отзывов
+//Р¤РёР»СЊС‚СЂ РґР»СЏ СЃС‡РµС‚С‡РёРєР° РѕС‚Р·С‹РІРѕРІ
 $countFilter = $arFilter;
 $countFilter['=ACTIVE'] = 'Y';
 
@@ -368,7 +368,7 @@ if($isPost) {
 		if($arParams['DETAIL_URL'])
 			$arParams['PAGE_URL'] = Tools::makeUrl($id, $arParams['DETAIL_URL']);
 
-		//---------- Проверим существование отзыва с таким ID ----------//
+		//---------- РџСЂРѕРІРµСЂРёРј СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёРµ РѕС‚Р·С‹РІР° СЃ С‚Р°РєРёРј ID ----------//
 		$row = ReviewsTable::getRow(array(
 			 'select' => array('ID', 'REPLY_SEND', 'FILES', 'VIDEOS'),
 			 'filter' => array('=ID' => $id),
@@ -377,7 +377,7 @@ if($isPost) {
 		if($row == null)
 			die();
 
-		//---------- Админский экшн ----------//
+		//---------- РђРґРјРёРЅСЃРєРёР№ СЌРєС€РЅ ----------//
 		if($isEditor) {
 			if($action == 'send') {
 				if($arParams['USE_SUBSCRIBE'] == 'Y') {
@@ -418,7 +418,7 @@ if($isPost) {
 							unset($fields[ $key ]);
 					}
 
-					//Обязательно обновить эти поля если изменяется отзыв
+					//РћР±СЏР·Р°С‚РµР»СЊРЅРѕ РѕР±РЅРѕРІРёС‚СЊ СЌС‚Рё РїРѕР»СЏ РµСЃР»Рё РёР·РјРµРЅСЏРµС‚СЃСЏ РѕС‚Р·С‹РІ
 					$fields['PAGE_URL']   = $arParams['PAGE_URL'];
 					$fields['PAGE_TITLE'] = $arParams['PAGE_TITLE'];
 
@@ -520,7 +520,7 @@ if($isPost) {
 			}
 		}
 
-		//---------- Публичный экшн ----------//
+		//---------- РџСѓР±Р»РёС‡РЅС‹Р№ СЌРєС€РЅ ----------//
 		if($action == 'vote') {
 
 			$vote     = $request->getPost('value');
@@ -582,7 +582,7 @@ if($cache_time > 0 && $cache->initCache($cache_time, $cache_id, $cache_path)) {
 else {
 */
 
-	//Обновление кэша при аякс-изменениях
+	//РћР±РЅРѕРІР»РµРЅРёРµ РєСЌС€Р° РїСЂРё Р°СЏРєСЃ-РёР·РјРµРЅРµРЅРёСЏС…
 	/*if($cache_time == 0) {
 		//$cache->clean($cache_id, $cache_path);
 		$cache->cleanDir($cache_path);
@@ -976,19 +976,19 @@ else {
 		//$taggetCache->endTagCache();
 
 		if($cache_time) {
-			//начинаем буферизирование вывода
+			//РЅР°С‡РёРЅР°РµРј Р±СѓС„РµСЂРёР·РёСЂРѕРІР°РЅРёРµ РІС‹РІРѕРґР°
 			//$cache->startDataCache($cache_time, $cache_id, $cache_path);
 
-			//Кэшируем переменные
+			//РљСЌС€РёСЂСѓРµРј РїРµСЂРµРјРµРЅРЅС‹Рµ
 			//$cache->endDataCache($arResult);
 		}
 	}
 	else {
 
-		//Отменяем кэширование
+		//РћС‚РјРµРЅСЏРµРј РєСЌС€РёСЂРѕРІР°РЅРёРµ
 		//$cache->abortDataCache();
 
-		//Выводим 404 страницу
+		//Р’С‹РІРѕРґРёРј 404 СЃС‚СЂР°РЅРёС†Сѓ
 		Tools::send404(
 			 trim($arParams["MESSAGE_404"]) ?: Loc::getMessage('API_REVIEWS_STATUS_404')
 			 , true

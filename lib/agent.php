@@ -31,14 +31,14 @@ class AgentTable extends Main\Entity\DataManager
 	public static function getMap()
 	{
 		/*
-			boolean (наследует ScalarField)
-			date (наследует ScalarField)
-			datetime (наследует DateField)
-			enum (наследует ScalarField)
-			float (наследует ScalarField)
-			integer (наследует ScalarField)
-			string (наследует ScalarField)
-			text (наследует StringField)
+			boolean (РЅР°СЃР»РµРґСѓРµС‚ ScalarField)
+			date (РЅР°СЃР»РµРґСѓРµС‚ ScalarField)
+			datetime (РЅР°СЃР»РµРґСѓРµС‚ DateField)
+			enum (РЅР°СЃР»РµРґСѓРµС‚ ScalarField)
+			float (РЅР°СЃР»РµРґСѓРµС‚ ScalarField)
+			integer (РЅР°СЃР»РµРґСѓРµС‚ ScalarField)
+			string (РЅР°СЃР»РµРґСѓРµС‚ ScalarField)
+			text (РЅР°СЃР»РµРґСѓРµС‚ StringField)
 		 */
 		return array(
 			 new Main\Entity\IntegerField('ID', array(
@@ -95,7 +95,7 @@ class Agent
 	 */
 	public static function add($reviewId, $siteId)
 	{
-		//Проверяем существование агента, чтобы не запустить дважды
+		//РџСЂРѕРІРµСЂСЏРµРј СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёРµ Р°РіРµРЅС‚Р°, С‡С‚РѕР±С‹ РЅРµ Р·Р°РїСѓСЃС‚РёС‚СЊ РґРІР°Р¶РґС‹
 		$arAgent = AgentTable::getRow(array(
 			 'filter' => array('=REVIEW_ID' => $reviewId),
 		));
@@ -131,10 +131,10 @@ class Agent
 		));
 
 		if($arAgent['ID']) {
-			//Удаляем агента Битрикс
+			//РЈРґР°Р»СЏРµРј Р°РіРµРЅС‚Р° Р‘РёС‚СЂРёРєСЃ
 			\CAgent::RemoveAgent("\\Api\\Reviews\\Agent::sendSubscribe(" . $arAgent['ID'] . ");", "api.reviews");
 
-			//Удаляем агента Отзывов
+			//РЈРґР°Р»СЏРµРј Р°РіРµРЅС‚Р° РћС‚Р·С‹РІРѕРІ
 			AgentTable::delete($arAgent['ID']);
 		}
 	}
@@ -159,7 +159,7 @@ class Agent
 
 		if($arAgent['REVIEW_ID']) {
 
-			//В рассылку попадают только активные отзывы, а агент пусть отработает для статистики и удалится
+			//Р’ СЂР°СЃСЃС‹Р»РєСѓ РїРѕРїР°РґР°СЋС‚ С‚РѕР»СЊРєРѕ Р°РєС‚РёРІРЅС‹Рµ РѕС‚Р·С‹РІС‹, Р° Р°РіРµРЅС‚ РїСѓСЃС‚СЊ РѕС‚СЂР°Р±РѕС‚Р°РµС‚ РґР»СЏ СЃС‚Р°С‚РёСЃС‚РёРєРё Рё СѓРґР°Р»РёС‚СЃСЏ
 			$arReview = ReviewsTable::getRow(array(
 				 'select' => array('ID', 'SITE_ID', 'IBLOCK_ID', 'SECTION_ID', 'ELEMENT_ID', 'ORDER_ID', 'URL', 'GUEST_EMAIL', 'PAGE_URL', 'PAGE_TITLE', 'RATING'),
 				 'filter' => array('=ID' => $arAgent['REVIEW_ID'], '=ACTIVE' => 'Y'),
@@ -229,8 +229,8 @@ class Agent
 
 
 
-		//Если функция агента возвращает вызов себя, то агент периодический.
-		//Если функция агента ничего не возвращает, то агент будет удален из таблицы и больше не запустится. Агент непериодический.
+		//Р•СЃР»Рё С„СѓРЅРєС†РёСЏ Р°РіРµРЅС‚Р° РІРѕР·РІСЂР°С‰Р°РµС‚ РІС‹Р·РѕРІ СЃРµР±СЏ, С‚Рѕ Р°РіРµРЅС‚ РїРµСЂРёРѕРґРёС‡РµСЃРєРёР№.
+		//Р•СЃР»Рё С„СѓРЅРєС†РёСЏ Р°РіРµРЅС‚Р° РЅРёС‡РµРіРѕ РЅРµ РІРѕР·РІСЂР°С‰Р°РµС‚, С‚Рѕ Р°РіРµРЅС‚ Р±СѓРґРµС‚ СѓРґР°Р»РµРЅ РёР· С‚Р°Р±Р»РёС†С‹ Рё Р±РѕР»СЊС€Рµ РЅРµ Р·Р°РїСѓСЃС‚РёС‚СЃСЏ. РђРіРµРЅС‚ РЅРµРїРµСЂРёРѕРґРёС‡РµСЃРєРёР№.
 		//return "\\Api\\Reviews\\Agent::sendSubscribe(" . $agentId . ");";
 	}
 }

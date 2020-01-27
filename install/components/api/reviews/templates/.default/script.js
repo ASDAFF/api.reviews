@@ -27,7 +27,7 @@ if (typeof jQuery === 'undefined') {
 			if (!this.data('apiReviews')) {
 				this.data('apiReviews', options);
 
-				// код плагина
+				// РєРѕРґ РїР»Р°РіРёРЅР°
 
 				//api-noindex
 				$('.api-reviews .api-noindex').each(function(){

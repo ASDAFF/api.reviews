@@ -72,7 +72,7 @@ if($isAction && !$response['message']) {
 		$arFile    = &$_FILES['FILES'];
 		$sessFiles = &$_SESSION['API_REVIEWS_FORM']['FILES'];
 
-		//Проверим лимиты на загружаемые видео
+		//РџСЂРѕРІРµСЂРёРј Р»РёРјРёС‚С‹ РЅР° Р·Р°РіСЂСѓР¶Р°РµРјС‹Рµ РІРёРґРµРѕ
 		if($arParams['UPLOAD_FILE_LIMIT']) {
 			if($sessFiles && count($sessFiles) == $arParams['UPLOAD_FILE_LIMIT']) {
 				$response['alert'] = Loc::getMessage('ARTA_ALERT_UPLOAD_FILE_LIMIT');
@@ -82,7 +82,7 @@ if($isAction && !$response['message']) {
 
 		if($arFile) {
 
-			//Создаем папку для загрузки временных файлов, если не создана
+			//РЎРѕР·РґР°РµРј РїР°РїРєСѓ РґР»СЏ Р·Р°РіСЂСѓР·РєРё РІСЂРµРјРµРЅРЅС‹С… С„Р°Р№Р»РѕРІ, РµСЃР»Рё РЅРµ СЃРѕР·РґР°РЅР°
 			if(!is_dir($arParams['UPLOAD_TMP_DIR']))
 				if(!mkdir($arParams['UPLOAD_TMP_DIR'], 0755, true))
 					$response['message'] = Loc::getMessage('AFDC_WARNING_UPLOAD_TMP_DIR');
@@ -151,13 +151,13 @@ if($isAction && !$response['message']) {
 	elseif($action == 'FILE_UNSET') {
 		if($fileCode = $request->get('FILE_CODE')) {
 
-			//Удалит файл с диска
+			//РЈРґР°Р»РёС‚ С„Р°Р№Р» СЃ РґРёСЃРєР°
 			$filePath = $arParams['UPLOAD_TMP_DIR'] . '/' . $fileCode;
 			if(is_file($filePath) && file_exists($filePath)) {
 				@unlink($filePath);
 			}
 
-			//Удалит файл из сессии
+			//РЈРґР°Р»РёС‚ С„Р°Р№Р» РёР· СЃРµСЃСЃРёРё
 			if($arSessFile = &$_SESSION['API_REVIEWS_FORM']['FILES']) {
 				if(isset($arSessFile[ $fileCode ]))
 					unset($arSessFile[ $fileCode ]);
@@ -197,7 +197,7 @@ if($isAction && !$response['message']) {
 
 		$sessVideos = &$_SESSION['API_REVIEWS_FORM']['VIDEOS'];
 
-		//Проверим лимиты на загружаемые видео
+		//РџСЂРѕРІРµСЂРёРј Р»РёРјРёС‚С‹ РЅР° Р·Р°РіСЂСѓР¶Р°РµРјС‹Рµ РІРёРґРµРѕ
 		if($arParams['UPLOAD_VIDEO_LIMIT']) {
 			if($sessVideos && count($sessVideos) == $arParams['UPLOAD_VIDEO_LIMIT']) {
 				$response['alert'] = Loc::getMessage('ARTA_ALERT_UPLOAD_VIDEO_LIMIT');
@@ -215,13 +215,13 @@ if($isAction && !$response['message']) {
 				 preg_match('/[http|https]+:\/\/(?:www\.|)youtube\.com\/embed\/([a-zA-Z0-9_\-]+)/i', $url, $matches) ||
 				 preg_match('/[http|https]+:\/\/(?:www\.|)youtu\.be\/([a-zA-Z0-9_\-]+)/i', $url, $matches)
 			) {
-				//Исходный адрес ролика
+				//РСЃС…РѕРґРЅС‹Р№ Р°РґСЂРµСЃ СЂРѕР»РёРєР°
 				//https://www.youtube.com/watch?v=8kJbXM1rftk
 
-				//Уменьшенное превью с черными полосами в ужасном качестве
+				//РЈРјРµРЅСЊС€РµРЅРЅРѕРµ РїСЂРµРІСЊСЋ СЃ С‡РµСЂРЅС‹РјРё РїРѕР»РѕСЃР°РјРё РІ СѓР¶Р°СЃРЅРѕРј РєР°С‡РµСЃС‚РІРµ
 				//http://img.youtube.com/vi/8kJbXM1rftk/0.jpg
 
-				//В исходном коде есть такие ссылки
+				//Р’ РёСЃС…РѕРґРЅРѕРј РєРѕРґРµ РµСЃС‚СЊ С‚Р°РєРёРµ СЃСЃС‹Р»РєРё
 				//<link rel="shortlink" href="https://youtu.be/8kJbXM1rftk">
 				//<link itemprop="embedURL" href="https://www.youtube.com/embed/8kJbXM1rftk">
 				//<link itemprop="thumbnailUrl" href="https://i.ytimg.com/vi/8kJbXM1rftk/maxresdefault.jpg">
@@ -232,7 +232,7 @@ if($isAction && !$response['message']) {
 				$videoUrl = 'https://www.youtube.com/embed/' . $videoId;
 				$imageUrl = 'http://img.youtube.com/vi/' . $videoId . '/0.jpg';
 
-				//Получаем html-страницу ролика и парсим
+				//РџРѕР»СѓС‡Р°РµРј html-СЃС‚СЂР°РЅРёС†Сѓ СЂРѕР»РёРєР° Рё РїР°СЂСЃРёРј
 				$html = Tools::curlExec($url);
 
 				preg_match('/<title>(.*)<\/title>/im', $html, $matches);
@@ -291,7 +291,7 @@ if($isAction && !$response['message']) {
 						 'description' => $videoDesc,
 					);
 
-					//Скачиваем картинку и добавляем в таблицу b_file
+					//РЎРєР°С‡РёРІР°РµРј РєР°СЂС‚РёРЅРєСѓ Рё РґРѕР±Р°РІР»СЏРµРј РІ С‚Р°Р±Р»РёС†Сѓ b_file
 					if($imageUrl) {
 						$fileName    = $videoId . '.' . GetFileExtension($imageUrl);
 						$tmpFileName = Tools::getUniqueFileName($fileName, 'VIDEOS', $USER->GetID());
@@ -344,7 +344,7 @@ if($isAction && !$response['message']) {
 	elseif($action == 'VIDEO_UNSET') {
 		if($videoId = trim($request->get('VIDEO_ID'))) {
 
-			//Удалит файл c диска и из сессии
+			//РЈРґР°Р»РёС‚ С„Р°Р№Р» c РґРёСЃРєР° Рё РёР· СЃРµСЃСЃРёРё
 			if($arSessThums = &$_SESSION['API_REVIEWS_FORM']['VIDEOS_THUMBS']) {
 				if(isset($arSessThums[ $videoId ])) {
 
@@ -356,7 +356,7 @@ if($isAction && !$response['message']) {
 				}
 			}
 
-			//Удалит видео из сессии
+			//РЈРґР°Р»РёС‚ РІРёРґРµРѕ РёР· СЃРµСЃСЃРёРё
 			if($arSessVideo = &$_SESSION['API_REVIEWS_FORM']['VIDEOS']) {
 				if(isset($arSessVideo[ $videoId ]))
 					unset($arSessVideo[ $videoId ]);

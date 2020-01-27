@@ -30,10 +30,10 @@ if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
  * @var CMain            $APPLICATION
  */
 
-//ID компонента
+//ID РєРѕРјРїРѕРЅРµРЅС‚Р°
 //$cpId = $this->getEditAreaId($this->__currentCounter);
 
-//Объект родительского компонента
+//РћР±СЉРµРєС‚ СЂРѕРґРёС‚РµР»СЊСЃРєРѕРіРѕ РєРѕРјРїРѕРЅРµРЅС‚Р°
 //$parent = $this->getParent();
 //$parentPath = $parent->getPath();
 
@@ -174,7 +174,7 @@ class ApiReviewsUserComponent extends Component
 			}
 		}
 		else {
-			//Выводим 404 страницу
+			//Р’С‹РІРѕРґРёРј 404 СЃС‚СЂР°РЅРёС†Сѓ
 			Tools::send404(
 				 trim($arParams["MESSAGE_404"]) ?: Loc::getMessage('API_REVIEWS_STATUS_404')
 				 , true

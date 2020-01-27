@@ -24,13 +24,13 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true)
  * @var CMain                    $APPLICATION
  */
 
-//$this - îáúåêò øàáëîíà
-//$component - îáúåêò êîìïîíåíòà
+//$this - Ð¾Ð±ÑŠÐµÐºÑ‚ ÑˆÐ°Ð±Ð»Ð¾Ð½Ð°
+//$component - Ð¾Ð±ÑŠÐµÐºÑ‚ ÐºÐ¾Ð¼Ð¿Ð¾Ð½ÐµÐ½Ñ‚Ð°
 
 //$this->GetFolder()
 //$tplId = $this->GetEditAreaId($arResult['ID']);
 
-//Îáúåêò ðîäèòåëüñêîãî êîìïîíåíòà
+//ÐžÐ±ÑŠÐµÐºÑ‚ Ñ€Ð¾Ð´Ð¸Ñ‚ÐµÐ»ÑŒÑÐºÐ¾Ð³Ð¾ ÐºÐ¾Ð¼Ð¿Ð¾Ð½ÐµÐ½Ñ‚Ð°
 //$parent = $component->getParent();
 //$parentPath = $parent->getPath();
 

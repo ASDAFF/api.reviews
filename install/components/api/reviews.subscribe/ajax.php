@@ -45,18 +45,18 @@ $server  = $context->getServer();
 
 //Bitrix\Main\Localization\Loc::loadMessages(dirname(__FILE__).'/class.php');
 
-//Ïîëó÷àåì äàííûå
+//ÐŸÐ¾Ð»ÑƒÑ‡Ð°ÐµÐ¼ Ð´Ð°Ð½Ð½Ñ‹Ðµ
 $return   = array();
 $siteId   = $request->getPost('siteId');
 $arParams = $request->getPost('params');
 $form     = $request->getPost('form');
 
-//Êîíâåðòèðóåì äàííûå
+//ÐšÐ¾Ð½Ð²ÐµÑ€Ñ‚Ð¸Ñ€ÑƒÐµÐ¼ Ð´Ð°Ð½Ð½Ñ‹Ðµ
 if(!Application::isUtfMode())
 	$form = Encoding::convertEncoding($form, 'UTF-8', $context->getCulture()->getCharset());
 
 
-//Îáðàáàòûâàåì äàííûå
+//ÐžÐ±Ñ€Ð°Ð±Ð°Ñ‚Ñ‹Ð²Ð°ÐµÐ¼ Ð´Ð°Ð½Ð½Ñ‹Ðµ
 if($form) {
 	foreach($form as $key => $val)
 		$form[ $key ] = htmlspecialcharsbx(trim($val));
@@ -87,7 +87,7 @@ if(!$return) {
 
 
 
-	//Ôèëüòð
+	//Ð¤Ð¸Ð»ÑŒÑ‚Ñ€
 	$arFilter = array(
 		 'SITE_ID' => $siteId,
 		 'EMAIL'   => $form['email'],

@@ -183,14 +183,14 @@ class api_reviews extends CModule
 
 	function InstallEvents()
 	{
-		//Получим все языки сайта для привязки типов
+		//РџРѕР»СѓС‡РёРј РІСЃРµ СЏР·С‹РєРё СЃР°Р№С‚Р° РґР»СЏ РїСЂРёРІСЏР·РєРё С‚РёРїРѕРІ
 		$arLangs = array();
 		$rsLangs = CLanguage::GetList($by = "lid", $order = "desc", Array("ACTIVE" => "Y"));
 		while($row = $rsLangs->Fetch()) {
 			$arLangs[] = $row['LID'];
 		}
 
-		//Добавляем типы почтовых событий
+		//Р”РѕР±Р°РІР»СЏРµРј С‚РёРїС‹ РїРѕС‡С‚РѕРІС‹С… СЃРѕР±С‹С‚РёР№
 		$eventType   = new CEventType;
 		$arEventType = (array)Loc::getMessage('ARII_EVENT_TYPE');
 		foreach($arEventType as $arFields) {
@@ -202,7 +202,7 @@ class api_reviews extends CModule
 		unset($arFields);
 
 
-		//Получим все активные сайты для привязки к почтовым шаблонам
+		//РџРѕР»СѓС‡РёРј РІСЃРµ Р°РєС‚РёРІРЅС‹Рµ СЃР°Р№С‚С‹ РґР»СЏ РїСЂРёРІСЏР·РєРё Рє РїРѕС‡С‚РѕРІС‹Рј С€Р°Р±Р»РѕРЅР°Рј
 		$arSiteId = array();
 		$rsSites  = \Bitrix\Main\SiteTable::getList(array(
 			 'select' => array('LID'),
@@ -212,7 +212,7 @@ class api_reviews extends CModule
 			$arSiteId[] = $row['LID'];
 
 
-		//Добавляем почтовые шаблоны
+		//Р”РѕР±Р°РІР»СЏРµРј РїРѕС‡С‚РѕРІС‹Рµ С€Р°Р±Р»РѕРЅС‹
 		$eventM         = new CEventMessage;
 		$arEventMessage = (array)Loc::getMessage('ARII_EVENT_MESSAGE');
 

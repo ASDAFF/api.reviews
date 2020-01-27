@@ -39,7 +39,7 @@ if($useCore) {
 	CUtil::InitJSCore(array('api_alert','api_upload'));
 }
 
-//Ëýíãè ïîëåé
+//Ð›ÑÐ½Ð³Ð¸ Ð¿Ð¾Ð»ÐµÐ¹
 $arFieldTitle = array();
 foreach(ReviewsTable::getMap() as $key => $value) {
 	$arFieldTitle[ $key ] = $value['title'];
@@ -95,7 +95,7 @@ if($request->isPost() && $bUpdate && check_bitrix_sessid()) {
 	//$postFields['MODIFIED_BY'] = $USER->GetID();
 
 
-	//Óäàëèì èç ôîðìû äàííûå ïî ôàéëàì, ÷òîáû íå çàòåðåòü óæå ïðèêðåïëåííûå
+	//Ð£Ð´Ð°Ð»Ð¸Ð¼ Ð¸Ð· Ñ„Ð¾Ñ€Ð¼Ñ‹ Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð¿Ð¾ Ñ„Ð°Ð¹Ð»Ð°Ð¼, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð½Ðµ Ð·Ð°Ñ‚ÐµÑ€ÐµÑ‚ÑŒ ÑƒÐ¶Ðµ Ð¿Ñ€Ð¸ÐºÑ€ÐµÐ¿Ð»ÐµÐ½Ð½Ñ‹Ðµ
 	unset($postFields['VIDEOS'], $postFields['FILES']);
 
 
@@ -129,7 +129,7 @@ if($request->isPost() && $bUpdate && check_bitrix_sessid()) {
 				 'filter' => array('=ID' => $id),
 			));
 
-			//Äîáàâèì ôàéëû â òàáëèöó b_file
+			//Ð”Ð¾Ð±Ð°Ð²Ð¸Ð¼ Ñ„Ð°Ð¹Ð»Ñ‹ Ð² Ñ‚Ð°Ð±Ð»Ð¸Ñ†Ñƒ b_file
 			$arFileId = ($review['FILES'] ? explode(',', $review['FILES']) : array());
 			$fileList = (array)$_SESSION['API_REVIEWS_FORM']['FILES'];
 			if($fileList) {
@@ -141,7 +141,7 @@ if($request->isPost() && $bUpdate && check_bitrix_sessid()) {
 			}
 
 
-			//Ñíà÷àëà äîáàâèì ïðåâüþ âèäåî â òàáëèöó b_file
+			//Ð¡Ð½Ð°Ñ‡Ð°Ð»Ð° Ð´Ð¾Ð±Ð°Ð²Ð¸Ð¼ Ð¿Ñ€ÐµÐ²ÑŒÑŽ Ð²Ð¸Ð´ÐµÐ¾ Ð² Ñ‚Ð°Ð±Ð»Ð¸Ñ†Ñƒ b_file
 			$videoList = (array)$_SESSION['API_REVIEWS_FORM']['VIDEOS'];
 			if($thumbList = (array)$_SESSION['API_REVIEWS_FORM']['VIDEOS_THUMBS']) {
 				foreach($thumbList as $key => $arFile) {
@@ -153,7 +153,7 @@ if($request->isPost() && $bUpdate && check_bitrix_sessid()) {
 				unset($thumbList, $arFile, $_SESSION['API_REVIEWS_FORM']['VIDEOS_THUMBS']);
 			}
 
-			//Äîáàâèì âèäåî â òàáëèöó api_reviews_video
+			//Ð”Ð¾Ð±Ð°Ð²Ð¸Ð¼ Ð²Ð¸Ð´ÐµÐ¾ Ð² Ñ‚Ð°Ð±Ð»Ð¸Ñ†Ñƒ api_reviews_video
 			$arVideoId = ($review['VIDEOS'] ? explode(',', $review['VIDEOS']) : array());
 			if($videoList) {
 				foreach($videoList as $arVideo) {
@@ -171,7 +171,7 @@ if($request->isPost() && $bUpdate && check_bitrix_sessid()) {
 				unset($videoList, $arVideo, $rsVideo, $_SESSION['API_REVIEWS_FORM']['VIDEOS']);
 			}
 
-			//Îáíîâèì îòçûâ, çàïèøåì àéäèøíèêè ôàéëîâ è âèäåî
+			//ÐžÐ±Ð½Ð¾Ð²Ð¸Ð¼ Ð¾Ñ‚Ð·Ñ‹Ð², Ð·Ð°Ð¿Ð¸ÑˆÐµÐ¼ Ð°Ð¹Ð´Ð¸ÑˆÐ½Ð¸ÐºÐ¸ Ñ„Ð°Ð¹Ð»Ð¾Ð² Ð¸ Ð²Ð¸Ð´ÐµÐ¾
 			if($arFileId || $arVideoId) {
 				ReviewsTable::update($id, array(
 					 'FILES'  => implode(',', $arFileId),
@@ -188,7 +188,7 @@ if($request->isPost() && $bUpdate && check_bitrix_sessid()) {
 			BXClearCache(true, '/' . $fields['SITE_ID'] . '/api/reviews.recent');
 
 
-			//Îòïðàâèì îòâåò êëèåíòó
+			//ÐžÑ‚Ð¿Ñ€Ð°Ð²Ð¸Ð¼ Ð¾Ñ‚Ð²ÐµÑ‚ ÐºÐ»Ð¸ÐµÐ½Ñ‚Ñƒ
 			if($request->get('SEND_EVENT') == 'Y') {
 				Event::sendReply($id, $fields);
 			}
@@ -266,7 +266,7 @@ if($bSale) {
 
 
 
-//Êíîïêè = Äîáàâèòü/Êîïèðîâàòü/Óäàëèòü
+//ÐšÐ½Ð¾Ð¿ÐºÐ¸ = Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ/ÐšÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ/Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ
 $aContext = array(
 	 array(
 			"TEXT" => Loc::getMessage('MAIN_ADMIN_MENU_LIST'),
@@ -307,11 +307,11 @@ $aTabs      = array(
 $tabControl = new CAdminForm("review_edit", $aTabs);
 
 
-//---------- Âñå äàííûå ïî îòçûâó ----------//
+//---------- Ð’ÑÐµ Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð¿Ð¾ Ð¾Ñ‚Ð·Ñ‹Ð²Ñƒ ----------//
 $fields = ($request->isPost()) ? $request->getPostList()->toArray() : $arReview;
 
 
-//---------- Âñå äàííûå ïî èíôîáëîêó/ðàçäåëó/ýëåìåíòó ----------//
+//---------- Ð’ÑÐµ Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð¿Ð¾ Ð¸Ð½Ñ„Ð¾Ð±Ð»Ð¾ÐºÑƒ/Ñ€Ð°Ð·Ð´ÐµÐ»Ñƒ/ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ñƒ ----------//
 $arIblock  = array();
 $arElement = array();
 if($bIblock) {
@@ -326,7 +326,7 @@ if($bIblock) {
 
 
 
-//---------- Ôàéëû è âèäåî èç ÁÄ ----------//
+//---------- Ð¤Ð°Ð¹Ð»Ñ‹ Ð¸ Ð²Ð¸Ð´ÐµÐ¾ Ð¸Ð· Ð‘Ð” ----------//
 if($fields['FILES']) {
 	$arFiles = array();
 	if($arFileId = explode(',', $fields['FILES'])) {
@@ -391,7 +391,7 @@ if($fields['VIDEOS']) {
 }
 
 
-//---------- Ôàéëû è âèäåî èç ñåññèè ----------//
+//---------- Ð¤Ð°Ð¹Ð»Ñ‹ Ð¸ Ð²Ð¸Ð´ÐµÐ¾ Ð¸Ð· ÑÐµÑÑÐ¸Ð¸ ----------//
 $arResult['FILES'] = array();
 if(isset($_SESSION['API_REVIEWS_FORM']['FILES'])) {
 	$arResult['FILES'] = $_SESSION['API_REVIEWS_FORM']['FILES'];
@@ -641,7 +641,7 @@ $tabControl->BeginPrologContent();
 					});
 				}
 			});
-			//Óäàëèò âèäåî èç ñåññèè
+			//Ð£Ð´Ð°Ð»Ð¸Ñ‚ Ð²Ð¸Ð´ÐµÐ¾ Ð¸Ð· ÑÐµÑÑÐ¸Ð¸
 			review_form.on('click', '.api_video_remove', function () {
 				var videBtn = $(this);
 				var videId = $(this).data('id') || '';
@@ -665,12 +665,12 @@ $tabControl->BeginPrologContent();
 					$(videBtn).closest('.api_video_item').remove();
 				}
 			});
-			//Óäàëèò âèäåî èç áàçû
+			//Ð£Ð´Ð°Ð»Ð¸Ñ‚ Ð²Ð¸Ð´ÐµÐ¾ Ð¸Ð· Ð±Ð°Ð·Ñ‹
 			review_form.on('click', '.js-getVideoDelete', function (e) {
 				e.preventDefault();
 				API_fileDelete(this, videoDeleteLang, 'VIDEO_DELETE');
 			});
-			//Óäàëèò ôàéë èç áàçû
+			//Ð£Ð´Ð°Ð»Ð¸Ñ‚ Ñ„Ð°Ð¹Ð» Ð¸Ð· Ð±Ð°Ð·Ñ‹
 			review_form.on('click','.js-getFileDelete',function(e){
 				e.preventDefault();
 				API_fileDelete(this,fileDeleteLang,'FILE_DELETE');
@@ -748,12 +748,12 @@ $tabControl->BeginEpilogContent();
 <?
 $tabControl->EndEpilogContent();
 
-//çàãîëîâêè çàêëàäîê
+//Ð·Ð°Ð³Ð¾Ð»Ð¾Ð²ÐºÐ¸ Ð·Ð°ÐºÐ»Ð°Ð´Ð¾Ðº
 $tabControl->Begin(array('FORM_ACTION' => $APPLICATION->GetCurPage() . "?lang=" . $lang));
 
 
 //*********************************************************
-//                   ïåðâàÿ çàêëàäêà
+//                   Ð¿ÐµÑ€Ð²Ð°Ñ Ð·Ð°ÐºÐ»Ð°Ð´ÐºÐ°
 //*********************************************************
 $tabControl->BeginNextFormTab();
 

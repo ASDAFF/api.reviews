@@ -18,14 +18,14 @@ class ReviewsTable extends Main\Entity\DataManager
 	public static function getMap()
 	{
 		/*
-			boolean (наследует ScalarField)
-			date (наследует ScalarField)
-			datetime (наследует DateField)
-			enum (наследует ScalarField)
-			float (наследует ScalarField)
-			integer (наследует ScalarField)
-			string (наследует ScalarField)
-			text (наследует StringField)
+			boolean (РЅР°СЃР»РµРґСѓРµС‚ ScalarField)
+			date (РЅР°СЃР»РµРґСѓРµС‚ ScalarField)
+			datetime (РЅР°СЃР»РµРґСѓРµС‚ DateField)
+			enum (РЅР°СЃР»РµРґСѓРµС‚ ScalarField)
+			float (РЅР°СЃР»РµРґСѓРµС‚ ScalarField)
+			integer (РЅР°СЃР»РµРґСѓРµС‚ ScalarField)
+			string (РЅР°СЃР»РµРґСѓРµС‚ ScalarField)
+			text (РЅР°СЃР»РµРґСѓРµС‚ StringField)
 		 */
 		return array(
 			 'ID'               => array(
@@ -266,7 +266,7 @@ class ReviewsTable extends Main\Entity\DataManager
 	public static function setReviewCount($reviewId,$arReview = array())
 	{
 		///////////////////////////////////////////////////////
-		/// Счетчик комментариев
+		/// РЎС‡РµС‚С‡РёРє РєРѕРјРјРµРЅС‚Р°СЂРёРµРІ
 		/// /bitrix/components/bitrix/forum.topic.reviews/action.php:133
 		///////////////////////////////////////////////////////
 
@@ -294,11 +294,11 @@ class ReviewsTable extends Main\Entity\DataManager
 				//$propCountCode  = 'API_REVIEWS_COUNT';
 				//$propRatingCode = 'API_REVIEWS_RATING';
 
-				//СЧЕТЧИК ОТЗЫВОВ ДЛЯ ЭЛЕМЕНТА ИНФОБЛОКА
+				//РЎР§Р•РўР§РРљ РћРўР—Р«Р’РћР’ Р”Р›РЇ Р­Р›Р•РњР•РќРўРђ РРќР¤РћР‘Р›РћРљРђ
 				if($elementId = intval($arReview['ELEMENT_ID'])) {
 					$needProperty = array();
 
-					//1. Сначала проверяем наличие необходимых свойств и создаем при необходимости
+					//1. РЎРЅР°С‡Р°Р»Р° РїСЂРѕРІРµСЂСЏРµРј РЅР°Р»РёС‡РёРµ РЅРµРѕР±С…РѕРґРёРјС‹С… СЃРІРѕР№СЃС‚РІ Рё СЃРѕР·РґР°РµРј РїСЂРё РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚Рё
 					$res = \CIBlockElement::GetProperty($iblockId, $elementId, false, false, array('CODE' => $propCountCode));
 					if(!$res->fetch()) {
 						$needProperty[] = $propCountCode;
@@ -335,7 +335,7 @@ class ReviewsTable extends Main\Entity\DataManager
 						 '=ELEMENT_ID' => $elementId,
 					));*/
 
-					//2. Потом записываем значения рейтинга и счетчик в свойство
+					//2. РџРѕС‚РѕРј Р·Р°РїРёСЃС‹РІР°РµРј Р·РЅР°С‡РµРЅРёСЏ СЂРµР№С‚РёРЅРіР° Рё СЃС‡РµС‚С‡РёРє РІ СЃРІРѕР№СЃС‚РІРѕ
 					$arRating           = self::getElementRating($iblockId, $elementId, $siteId);
 					$API_REVIEWS_COUNT  = $arRating['COUNT'];
 					$API_REVIEWS_RATING = $arRating['RATING'];
@@ -419,7 +419,7 @@ class ReviewsTable extends Main\Entity\DataManager
 	}
 
 
-	//Запоминаем для удаления отзыва и пересчета рейтинга
+	//Р—Р°РїРѕРјРёРЅР°РµРј РґР»СЏ СѓРґР°Р»РµРЅРёСЏ РѕС‚Р·С‹РІР° Рё РїРµСЂРµСЃС‡РµС‚Р° СЂРµР№С‚РёРЅРіР°
 	protected static $arReview;
 
 	public static function OnAfterDelete(Entity\Event $event)
@@ -435,7 +435,7 @@ class ReviewsTable extends Main\Entity\DataManager
 
 		if($id = intval($primary['ID'])) {
 
-			//Получим необходимые поля для удаления файлов, видео и пересчета рейтинга
+			//РџРѕР»СѓС‡РёРј РЅРµРѕР±С…РѕРґРёРјС‹Рµ РїРѕР»СЏ РґР»СЏ СѓРґР°Р»РµРЅРёСЏ С„Р°Р№Р»РѕРІ, РІРёРґРµРѕ Рё РїРµСЂРµСЃС‡РµС‚Р° СЂРµР№С‚РёРЅРіР°
 			$row = self::getRow(array(
 				 'select' => array('ID', 'FILES', 'VIDEOS', 'IBLOCK_ID', 'SECTION_ID', 'ELEMENT_ID', 'SITE_ID'),
 				 'filter' => array('=ID' => $id),
@@ -443,7 +443,7 @@ class ReviewsTable extends Main\Entity\DataManager
 
 			self::$arReview = $row;
 
-			//Удаляем файлы отзыва из b_file
+			//РЈРґР°Р»СЏРµРј С„Р°Р№Р»С‹ РѕС‚Р·С‹РІР° РёР· b_file
 			if($row['FILES']) {
 				if($arFiles = explode(',', $row['FILES'])) {
 					foreach($arFiles as $fileId)
@@ -451,7 +451,7 @@ class ReviewsTable extends Main\Entity\DataManager
 				}
 			}
 
-			//Удаляем видео из api_reviews_video и превью видео из b_file
+			//РЈРґР°Р»СЏРµРј РІРёРґРµРѕ РёР· api_reviews_video Рё РїСЂРµРІСЊСЋ РІРёРґРµРѕ РёР· b_file
 			if($row['VIDEOS']) {
 				if($arVideos = explode(',', $row['VIDEOS'])) {
 					foreach($arVideos as $videoId) {

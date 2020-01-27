@@ -118,7 +118,7 @@ if($cache_time > 0 && $cache->initCache($cache_time, $cache_id, $cache_path)) {
 }
 else {*/
 
-	//Îáíîâëåíèå êýøà ïðè àÿêñ-èçìåíåíèÿõ
+	//ÐžÐ±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ðµ ÐºÑÑˆÐ° Ð¿Ñ€Ð¸ Ð°ÑÐºÑ-Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸ÑÑ…
 	/*if($cache_time == 0) {
 		//$cache->clean($cache_id, $cache_path);
 		$cache->cleanDir($cache_path);
@@ -172,10 +172,10 @@ else {*/
 		$arResult['MIN_AVERAGE_RATING'] = $arResult['AVERAGE_RATING'];
 
 	/*if($cache_time) {
-		//íà÷èíàåì áóôåðèçèðîâàíèå âûâîäà
+		//Ð½Ð°Ñ‡Ð¸Ð½Ð°ÐµÐ¼ Ð±ÑƒÑ„ÐµÑ€Ð¸Ð·Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ Ð²Ñ‹Ð²Ð¾Ð´Ð°
 		$cache->startDataCache($cache_time, $cache_id, $cache_path);
 
-		//Êýøèðóåì ïåðåìåííûå
+		//ÐšÑÑˆÐ¸Ñ€ÑƒÐµÐ¼ Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ñ‹Ðµ
 		$cache->endDataCache($arResult);
 	}
 }*/

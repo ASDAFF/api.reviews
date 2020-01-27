@@ -31,7 +31,7 @@ use \Api\Reviews\Tools;
 use \Api\Reviews\Agent;
 
 
-//Ëýíãè ïîëåé
+//Ð›ÑÐ½Ð³Ð¸ Ð¿Ð¾Ð»ÐµÐ¹
 $arFieldTitle = array();
 foreach(ReviewsTable::getMap() as $key => $value) {
 	$arFieldTitle[ $key ] = $value['title'];
@@ -175,7 +175,7 @@ if($AR_RIGHT == 'W' && $ids = $lAdmin->GroupAction()) {
 		if(empty($id))
 			continue;
 
-		//Îáÿçàòåëüíî ñìîòðèì $_REQUEST
+		//ÐžÐ±ÑÐ·Ð°Ñ‚ÐµÐ»ÑŒÐ½Ð¾ ÑÐ¼Ð¾Ñ‚Ñ€Ð¸Ð¼ $_REQUEST
 		$action = $_REQUEST['action'];
 
 		switch($action) {
@@ -446,7 +446,7 @@ while($arRecord = $dbResultList->NavNext(true, 'f_')) {
 	$idTmp = "<img src='" . $lamp . "' hspace='4' alt='" . htmlspecialcharsbx($lamp_alt) . "' title='" . htmlspecialcharsbx($lamp_alt) . "'>";
 
 	$row->AddViewField('ID', '<a style="white-space:nowrap;margin-right:8px;font-weight:bold;" href="api_reviews_edit.php?ID=' . $f_ID . '&lang=' . $lang . GetFilterParams("filter_") . '">' . $idTmp . Loc::getMessage('ARAL_REVIEW_NUMBER', array('#ID#' => $f_ID)) . '</a>');
-	//$row->AddField('ACTIVE', '<a href="api_reviews_edit.php?ID=' . $f_ID . '&lang=' . $lang . GetFilterParams("filter_") . '">' . $idTmp . '¹'. $f_ID . '</a>');
+	//$row->AddField('ACTIVE', '<a href="api_reviews_edit.php?ID=' . $f_ID . '&lang=' . $lang . GetFilterParams("filter_") . '">' . $idTmp . 'â„–'. $f_ID . '</a>');
 
 	$row->AddCheckField('ACTIVE');
 	$row->AddCalendarField('ACTIVE_FROM', $F_ACTIVE_FROM, true);
@@ -535,7 +535,7 @@ $lAdmin->AddFooter(
 );
 
 
-//Ìàññîâûå îïåðàöèè
+//ÐœÐ°ÑÑÐ¾Ð²Ñ‹Ðµ Ð¾Ð¿ÐµÑ€Ð°Ñ†Ð¸Ð¸
 if($AR_RIGHT == 'W') {
 	$lAdmin->AddGroupActionTable(Array(
 		 'delete'     => Loc::getMessage('MAIN_ADMIN_LIST_DELETE'),
@@ -546,7 +546,7 @@ if($AR_RIGHT == 'W') {
 }
 
 
-//Êíîïêà Äîáàâèòü
+//ÐšÐ½Ð¾Ð¿ÐºÐ° Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ
 $lAdmin->AddAdminContextMenu(array(
 	 array(
 			'TEXT' => Loc::getMessage('MAIN_ADD'),

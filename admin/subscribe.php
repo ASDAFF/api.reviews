@@ -36,7 +36,7 @@ $request = $context->getRequest();
 $lang    = $context->getLanguage();
 
 
-//Ëýíãè ïîëåé
+//Ð›ÑÐ½Ð³Ð¸ Ð¿Ð¾Ð»ÐµÐ¹
 $arFieldTitle   = array();
 $arFilterFields = array();
 $arFilterTitles = array();
@@ -269,7 +269,7 @@ $lAdmin->AddFooter(
 );
 
 
-//Ìàññîâûå îïåðàöèè
+//ÐœÐ°ÑÑÐ¾Ð²Ñ‹Ðµ Ð¾Ð¿ÐµÑ€Ð°Ñ†Ð¸Ð¸
 if($AR_RIGHT == 'W') {
 	$lAdmin->AddGroupActionTable(Array(
 		 'delete' => Loc::getMessage('MAIN_ADMIN_LIST_DELETE'),

@@ -11,16 +11,16 @@ function JCEditorOpener(arParams) {
 	//this.jsOptions = arParams.data.split('||');
 	this.arParams = arParams;
 
-	//Создаём текстовое поле
+	//РЎРѕР·РґР°С‘Рј С‚РµРєСЃС‚РѕРІРѕРµ РїРѕР»Рµ
 	var obInput = document.createElement('INPUT');
 	obInput.id = "CURRENT_PROPERTY_FILE_TYPE";
 	obInput.type = "text";
 	obInput.value = this.arParams.oInput.value;
 
-	// добавляем в контейнер
+	// РґРѕР±Р°РІР»СЏРµРј РІ РєРѕРЅС‚РµР№РЅРµСЂ
 	this.arParams.oCont.appendChild(obInput);
 
-	//Создаём список параметров
+	//РЎРѕР·РґР°С‘Рј СЃРїРёСЃРѕРє РїР°СЂР°РјРµС‚СЂРѕРІ
 	var obSelect = document.createElement('select');
 
 	for (var i in this.arParams.data) {
@@ -35,10 +35,10 @@ function JCEditorOpener(arParams) {
 		obSelect.appendChild(option);
 	}
 
-	// добавляем в контейнер
+	// РґРѕР±Р°РІР»СЏРµРј РІ РєРѕРЅС‚РµР№РЅРµСЂ
 	this.arParams.oCont.appendChild(obSelect);
 
-	//obButton.innerHTML = this.jsOptions[1];//текст из JS_DATA
+	//obButton.innerHTML = this.jsOptions[1];//С‚РµРєСЃС‚ РёР· JS_DATA
 
 	obInput.onchange = function () {
 		arParams.oInput.value = this.value;
