@@ -38,6 +38,16 @@ if($arParams['INCLUDE_CSS'] == 'Y') {
 	$this->addExternalCss($templateFolder . '/theme/' . $arParams['THEME'] . '/style.css');
 }
 
+$this->addExternalCss($templateFolder . '/plugins/button/api.button.css');
+$this->addExternalCss($templateFolder . '/plugins/form/api.form.css');
+
+$this->addExternalCss($templateFolder . '/plugins/css/modal.css');
+$this->addExternalCss($templateFolder . '/plugins/css/form.css');
+$this->addExternalCss($templateFolder . '/plugins/css/button.css');
+
+//$this->addExternalCss($templateFolder . '/plugins/modal/api.modal.css');
+$this->addExternalJs($templateFolder . '/plugins/modal/api.modal.js');
+
 $formId  = trim($arParams['FORM_ID']);
 $modalId = $formId . '_modal';
 ?>
